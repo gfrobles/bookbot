@@ -3,9 +3,10 @@ def main():
     text = get_book_text(path_to_book)
     words = get_book_words(text)
     word_count = len(words)
-    print(word_count)
+    #print(word_count)
     character_count = get_book_character(text)
-    print(character_count)
+    #print(character_count)
+    print_report(word_count, character_count)
 
 def get_book_text(path):
     with open(path) as f:
@@ -26,5 +27,15 @@ def get_book_character(text):
             characters[i] = 1
 
     return characters
+def print_report(word_count, character_count):
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count} words found in the document")
+    print()
+    print()
+    sorted_dict = dict(sorted(character_count.items(), key=lambda item: item[1], reverse=True))
+    for key, value in sorted_dict.items():
+        if key.isalpha():
+            print(f"the '{key}' character was found {value} times")
+    print("--- End report ---")
 
 main()
